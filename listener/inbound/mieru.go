@@ -2,7 +2,6 @@ package inbound
 
 import (
 	"fmt"
-	"strconv"
 	"sync"
 
 	"github.com/metacubex/mihomo/adapter/inbound"
@@ -152,9 +151,6 @@ func buildMieruServerConfig(option *MieruOption, ports utils.IntRanges[uint16]) 
 	advancedSettings := &mierupb.ServerAdvancedSettings{}
 	if option.UserHintIsMandatory {
 		advancedSettings.UserHintIsMandatory = proto.Bool(true)
-	}
-	if option.TCPIdleTimeoutSecond != 0 {
-		advancedSettings.TcpIdleTimeout = proto.String(strconv.Itoa(option.TCPIdleTimeoutSecond) + "s")
 	}
 	lc := option.ListenConfig()
 	return &mieruserver.ServerConfig{
